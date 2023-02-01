@@ -16,10 +16,10 @@ RSpec.describe "Characters", type: :request do
       expect(character.length).to eq 1
     end
   end
-end
 
-describe "POST /create" do
-  it "creates a character" do
+
+  describe "POST /create" do
+    it "creates a character" do
     character_params = {
       character: {
         name: 'Naruto',
@@ -37,4 +37,66 @@ describe "POST /create" do
 
     expect(character.name).to eq 'Naruto'
   end
+
+    it "doesn't create a character without a name" do
+      character_params = {
+        character: {
+          age: 2,
+          enjoys: 'running',
+          image: 'https://media.istockphoto.com/id/1429860515/photo/young-sports-man-preparing-to-run-with-new-year-number-2023-on-the-road.jpg?s=612x612&w=is&k=20&c=Y6MOQWZpTevKeelIWnTGvQosRZ7xe32Nroy8jahW8Pg='
+        }
+      }
+      
+      post '/characters', params: character_params 
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['name']).to include "can't be blank"
+    end
+
+    it "doesn't create a character without a age" do
+      character_params = {
+        character: {
+          name: 'DOM',
+          enjoys: 'running',
+          image: 'https://media.istockphoto.com/id/1429860515/photo/young-sports-man-preparing-to-run-with-new-year-number-2023-on-the-road.jpg?s=612x612&w=is&k=20&c=Y6MOQWZpTevKeelIWnTGvQosRZ7xe32Nroy8jahW8Pg='
+        }
+      }
+      
+      post '/characters', params: character_params 
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['age']).to include "can't be blank"
+    end
+
+    it "doesn't create a character without enjoys" do
+      character_params = {
+        character: {
+          name: 'DOM',
+          age: 3,
+          image: 'https://media.istockphoto.com/id/1429860515/photo/young-sports-man-preparing-to-run-with-new-year-number-2023-on-the-road.jpg?s=612x612&w=is&k=20&c=Y6MOQWZpTevKeelIWnTGvQosRZ7xe32Nroy8jahW8Pg='
+        }
+      }
+      
+      post '/characters', params: character_params 
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['enjoys']).to include "can't be blank"
+    end
+
+    it "doesn't create a character without a image" do
+      character_params = {
+        character: {
+          name: 'DOM',
+          age: 3,
+          enjoys: 'running'
+        }
+      }
+      
+      post '/characters', params: character_params 
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['image']).to include "can't be blank"
+    end
+  end
 end
+
