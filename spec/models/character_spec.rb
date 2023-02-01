@@ -13,7 +13,6 @@ RSpec.describe Character, type: :model do
 
   it "no less than 10 characters" do
     character = Character.create name: 'bob', age: 91, enjoys:'pudding', image: 'google.com'
-    p character.errors
     expect(character.errors[:enjoys]).to_not be_empty
   end
 end
