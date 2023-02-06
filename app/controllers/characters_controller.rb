@@ -14,6 +14,13 @@ class CharactersController < ApplicationController
     end
   
     def update
+        character = Character.find(params[:id])
+        character.update(character_params)
+        if character.valid?
+            render json: character
+        else
+            render json: character.errors, status: 422
+        end
     end
   
     def destroy
