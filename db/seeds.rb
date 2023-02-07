@@ -2,7 +2,7 @@ characters = [
   {
     name: 'Spider-man',
     age: 18,
-    enjoys: 'Mary-Jane',
+    enjoys: 'Mary-Jane!!!',
     image: 'https://images.unsplash.com/photo-1604200213928-ba3cf4fc8436?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3BpZGVybWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
   },
   {
